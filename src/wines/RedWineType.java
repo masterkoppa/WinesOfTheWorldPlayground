@@ -10,12 +10,12 @@ public enum RedWineType implements WineType {
 	SHIRAZ( "Shiraz" ),
 	ZINFADEL( "Zinfadel" );
 	
-	private String typeOfRed = "";
-	private RedWineType( String type ){
-		typeOfRed = type;
+	private String typeOfWine = "";
+	private RedWineType( String typeOfWine ){
+		this.typeOfWine = typeOfWine;
 	}
 	
 	public String getType(){
-		return typeOfRed;
+		return typeOfWine;
 	}
 }

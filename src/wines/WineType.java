@@ -1,6 +1,6 @@
 package wines;
 
 public interface WineType {
-	String type = "";
+	String typeOfWine = "";
 	public String getType();
 }
