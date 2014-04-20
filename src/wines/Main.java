@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<Wine> wines = new ArrayList<Wine>();
 		try{
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Chris\\workspace\\WinesOfTheWorldPlayground\\wines.csv" ) );
+			BufferedReader reader = new BufferedReader(new FileReader("E:\\Users\\Andres\\IdeaProjects\\WinesOfTheWorldPlayground\\wines.csv" ) );
 			String line = null;
 			int counter = 0;
 			while (( line = reader.readLine()) != null ) {
@@ -188,7 +188,10 @@ public class Main {
 		
 		for( Wine wine: wines ){
 			for( String note: notes ){
-				for (String tastingNote: wine.getTastingNotes().split("|") ){
+                // Escape the special character with \\
+                String[] individualNotes = wine.getTastingNotes().split("\\|");
+				for (String tastingNote : individualNotes){
+                    //System.out.println(tastingNote.trim()); //DEBUG
 					if( tastingNote.contains( note ) ){
 						searchedWines.add(wine);
 					}
