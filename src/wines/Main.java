@@ -26,6 +26,7 @@ public class Main {
 				String region = explodedLine[5].trim();
 				String country = explodedLine[6].trim();
 				String abv = explodedLine[7].trim();
+				String notes = explodedLine[8].trim();
 				
 				Wine wine = null;
 				if( type.equals("white")){
@@ -44,6 +45,7 @@ public class Main {
 				wine.setRegion(region);
 				wine.setCountry(country);
 				wine.setAbv( Double.parseDouble(abv));
+				wine.setTastingNotes( notes );
 				wines.add(wine);
 				counter++;
 			}
@@ -72,7 +74,38 @@ public class Main {
 			System.out.println();
 			System.out.println();
 			
+			//search for wines priced between 10 and 19
+			searchedWines = searchByPrice( wines, 10.0, 19.0 );
+			for( Wine wine: searchedWines ){
+				System.out.println( wine );
+			}
 			
+			System.out.println();
+			System.out.println();
+			
+			//search for wines in a specific region: Oregon
+			searchedWines = searchByRegion( wines, "Oregon" );
+			for( Wine wine: searchedWines ){
+				System.out.println( wine );
+			}
+			
+			System.out.println();
+			System.out.println();
+			
+			//search for wines in a specific country: U.S.
+			searchedWines = searchByCountry( wines, "U.S." );
+			for( Wine wine: searchedWines ){
+				System.out.println( wine );
+			}
+			
+			System.out.println();
+			System.out.println();
+			
+			//search by tasting note: pepper
+			searchedWines = searchByTastingNotes( wines, "pepper");
+			for( Wine wine: searchedWines ){
+				System.out.println( wine );
+			}
 			
 		} catch (Exception e){
 			System.out.println("Something happened.");
@@ -99,6 +132,69 @@ public class Main {
 			if( wine.getVintage() == vintage ){
 				searchedWines.add( wine );
 			}
+		}
+		
+		return searchedWines;
+	}
+	
+	private static ArrayList<Wine> searchByPrice( ArrayList<Wine> wines, Double lowerPrice, Double higherPrice ){
+		ArrayList<Wine> searchedWines = new ArrayList<Wine>();
+		
+		for( Wine wine: wines ){
+			if( lowerPrice == null ){
+				if( wine.getPrice() <= higherPrice ){
+					searchedWines.add(wine);
+				}
+			} else if ( higherPrice == null ){
+				if( wine.getPrice() >= lowerPrice ){
+					searchedWines.add(wine);
+				}
+			} else {
+				if( wine.getPrice() >= lowerPrice && wine.getPrice() <= higherPrice ){
+					searchedWines.add(wine);
+				}
+			}
+		}
+		
+		return searchedWines;
+	}
+	
+	private static ArrayList<Wine> searchByRegion( ArrayList<Wine> wines, String region ){
+		ArrayList<Wine> searchedWines = new ArrayList<Wine>();
+		
+		for( Wine wine: wines ){
+			if( wine.getRegion().contains( region ) ){
+				searchedWines.add( wine );
+			}
+		}
+		
+		return searchedWines;
+	}
+	
+	private static ArrayList<Wine> searchByCountry( ArrayList<Wine> wines, String country ){
+		ArrayList<Wine> searchedWines = new ArrayList<Wine>();
+		
+		for( Wine wine: wines ){
+			if( wine.getCountry().contains( country ) ){
+				searchedWines.add( wine );
+			}
+		}
+		
+		return searchedWines;
+	}
+	
+	private static ArrayList<Wine> searchByTastingNotes( ArrayList<Wine> wines, String ... notes ){
+		ArrayList<Wine> searchedWines = new ArrayList<Wine>();
+		
+		for( Wine wine: wines ){
+			for( String note: notes ){
+				for (String tastingNote: wine.getTastingNotes().split("|") ){
+					if( tastingNote.contains( note ) ){
+						searchedWines.add(wine);
+					}
+				}
+			}
+			
 		}
 		
 		return searchedWines;
