@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<Wine> wines = new ArrayList<Wine>();
 		try{
-			BufferedReader reader = new BufferedReader(new FileReader("E:\\Users\\Andres\\IdeaProjects\\WinesOfTheWorldPlayground\\wines.csv" ) );
+			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Chris\\workspace\\WinesOfTheWorldPlayground\\wines.csv" ) );
 			String line = null;
 			int counter = 0;
 			while (( line = reader.readLine()) != null ) {
