@@ -1,9 +1,20 @@
 package wines;
 
 public class RedWine extends Wine {
-	private RedWineType type = null;
 	
-	public RedWine( RedWineType type ){
-		this.type = type;
+	public RedWine( String grape ){
+		this.grape = grape;
+	}
+	
+	@Override
+	public String toString() {
+		return "RedWine [grape=" + grape + ", getVintage()=" + getVintage()
+				+ ", getName()=" + getName() + ", getPrice()=" + getPrice()
+				+ ", getRegion()=" + getRegion() + ", getCountry()="
+				+ getCountry() + ", getAbv()=" + getAbv() + "]";
+	}
+	
+	public String getGrape(){
+		return grape;
 	}
 }
